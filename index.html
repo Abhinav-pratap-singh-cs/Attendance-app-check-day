@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light" />
+<title>Attendance Ledger</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="screen login-screen active">
+    <div class="login-card">
+      <h1>Attendance Ledger</h1>
+      <p class="tagline">Log your classes, watch your percentage.</p>
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginNameInput">Your name or roll number</label>
+          <input type="text" id="loginNameInput" autocomplete="off" placeholder="e.g. ishu" />
+        </div>
+        <button type="submit" class="btn">Open my ledger</button>
+        <p class="error-text" id="loginError" role="alert"></p>
+      </form>
+      <div class="recent" id="recentChips"></div>
+      <p class="note">Everything you enter stays in this browser tab — refresh the page and it resets.</p>
+      <h1> Build By Abhinav</h1>
+      <h1>help by AI</h1>
+    </div>
+  </div>
+
+  <!-- DASHBOARD SCREEN -->
+  <div id="dashboardScreen" class="screen">
+    <header class="topbar">
+      <div class="brand">Attendance Ledger</div>
+      <div class="user-info">
+        <span id="userLabel"></span>
+        <button type="button" class="btn-text" id="switchBtn">Switch student</button>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <section class="col-entry">
+        <h2 class="section-title">Log your classes</h2>
+        <form id="entryForm" novalidate>
+          <div class="field">
+            <label for="inputDaysHappened">Days college has held classes so far</label>
+            <input type="number" id="inputDaysHappened" min="0" step="1" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="inputFullDays">Full days you attended (8 lectures)</label>
+            <input type="number" id="inputFullDays" min="0" step="1" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="inputHalfDays">Half days you attended (4 lectures)</label>
+            <input type="number" id="inputHalfDays" min="0" step="1" inputmode="numeric" />
+          </div>
+          <button type="submit" class="btn">Update ledger</button>
+          <p class="error-text" id="formError" role="alert"></p>
+        </form>
+      </section>
+
+      <section class="col-summary">
+        <h2 class="section-title">Your attendance</h2>
+        <div id="summaryEmpty" class="empty-state">Log your first day to see your attendance.</div>
+        <div id="summaryFilled" style="display:none;" aria-live="polite">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 160 160" width="160" height="160" aria-hidden="true">
+              <circle cx="80" cy="80" r="70" fill="none" stroke="var(--rule-strong)" stroke-width="10" />
+              <circle id="progressRing" cx="80" cy="80" r="70" fill="none" stroke="var(--stamp-green)"
+                stroke-width="10" stroke-linecap="round" transform="rotate(-90 80 80)" />
+            </svg>
+            <div class="ring-center">
+              <div id="percentText" class="percent-text">—</div>
+              <div id="statusLabel" class="status-label"></div>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat-row"><span class="label">Classes conducted</span><span class="leader"></span><span class="value" id="statConducted">0</span></div>
+            <div class="stat-row"><span class="label">Classes attended</span><span class="leader"></span><span class="value" id="statAttended">0</span></div>
+            <div class="stat-row"><span class="label">Classes missed</span><span class="leader"></span><span class="value" id="statMissed">0</span></div>
+            <div class="stat-row"><span class="label">Days absent</span><span class="leader"></span><span class="value" id="statAbsentDays">0</span></div>
+          </div>
+
+          <div class="target-section">
+            <div class="target-row">
+              <label for="targetInput">Target attendance</label>
+              <input type="number" id="targetInput" min="1" max="100" step="0.5" value="75" />
+              <span>%</span>
+            </div>
+            <p class="target-message" id="targetMessage"></p>
+            <p class="target-submessage" id="targetSubMessage"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
